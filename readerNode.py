@@ -1,5 +1,8 @@
+# Node containing files
+# Provides read and write methods and registers with a master server
+
 import requests
-from flask import Flask, request
+from flask import Flask, request, send_file
 import os
 
 file_folder = '~/Documents/fourth-year/distsyst/fileSystem/files/'
@@ -17,4 +20,9 @@ def write_file():
 
 @app.route('/read', methods=['GET'])
 def read_file():
-	
+	try:
+		filename = request.args.get('filename')
+		filepath = 'files/{filename}'.format(filename=filename)
+		return send_file(filepath, attachment_filename=filename)
+	except Exception as e:
+		return str(e)
