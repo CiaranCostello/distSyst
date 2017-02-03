@@ -1,11 +1,12 @@
 # Node containing files
-# Provides read and write methods and registers with a master server
+# 	Provides read and write methods and registers with a master server
 
 import requests
 from flask import Flask, request, send_file
 import os
 
 file_folder = '~/Documents/fourth-year/distsyst/fileSystem/files/'
+server_key = 'Mary had a little lamb'
 
 app = Flask(__name__)
 app.config['FILE_FOLDER'] = file_folder
@@ -26,3 +27,6 @@ def read_file():
 		return send_file(filepath, attachment_filename=filename)
 	except Exception as e:
 		return str(e)
+
+if __name__ == '__main__':
+	app.run()
